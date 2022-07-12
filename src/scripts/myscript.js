@@ -5,15 +5,15 @@ console.log(employees);
 updateAfterPaageRefresh();
 
 function onSubmitFrom() {
-  if (validarFormulario()) {
+  
     var formData = readForm();
-    if (selectRow == null) {
+    if (selectRow == null && validarFormulario()) {
       insertNewRecord(formData);
     } else {
       updateRecord(formData);
     }
     resetForm();
-  }
+  
 }
 
 function readForm() {
@@ -45,7 +45,7 @@ function insertNewRecord(formData) {
   var table = document
     .getElementById("tableProyectos")
     .getElementsByTagName("tbody")[0];
-  var newRow = table.insertRow();
+  var newRow = table.insertRow(table.length);
   cell1 = newRow.insertCell(0);
   cell1.innerHTML = formData.nombre;
   cell2 = newRow.insertCell(1);
@@ -55,12 +55,11 @@ function insertNewRecord(formData) {
   cell4 = newRow.insertCell(3);
   cell4.innerHTML = formData.fecha_fin;
   cell5 = newRow.insertCell(4);
-  cell5.innerHTML = days;
+  cell5.innerHTML = formData.tipo_proyecto;
   cell6 = newRow.insertCell(5);
   cell6.innerHTML = `<button class="bg-green-600 text-green-200 text-sm p-1 border border-green-800" onclick="editForm(this)">Edit</button> <button class="bg-red-600 text-red-200 text-sm p-1 border border-red-800" onclick="deleteRecord(this)">Delete</button> <button class="bg-yellow-600 text-yellow-200 text-sm p-1 border border-yellow-800" onclick="onVista(this)">Vista Rapida</button>`;
   employees.push(formData);
   localStorage.setItem("employees", JSON.stringify(employees));
-  
 }
 
 function resetForm() {
@@ -76,8 +75,8 @@ function resetForm() {
   selectRow = null;
 }
 
-function deleteRecord(a) {
-  var row = a.parentElement.parentElement;
+function deleteRecord(td) {
+  var row = td.parentElement.parentElement;
   if (confirm("Estas seguro que quieres eliminar este proyecto?")) {
     document.getElementById("tableProyectos").deleteRow(row.rowIndex);
     employees.splice(row.rowIndex - 1, 1);
@@ -85,32 +84,42 @@ function deleteRecord(a) {
   }
 }
 
-
-function editForm(a) {
-    selectRow = a.parentElement.parentElement;
-    document.getElementById("nombre").value = selectRow.cells[0].innerHTML;
-    document.getElementById("tipo_proyecto").value = selectRow.cells[1].innerHTML;
-    document.getElementById("fecha_ini").value = selectRow.cells[2].innerHTML;
-    document.getElementById("fecha_fin").value = selectRow.cells[3].innerHTML;
-    document.getElementById("responsable").value = selectRow.cells[4].innerHTML;
-    document.getElementById("presupuesto").value = selectRow.cells[5].innerHTML;
-    document.getElementById("tipo_persona").value = selectRow.cells[6].innerHTML;
-    document.getElementById("tipo_profesor").value = selectRow.cells[7].innerHTML;
-    document.getElementById("semestreEstudiante").value = selectRow.cells[8].innerHTML;
+function editForm(td) {
+  selectRow = td.parentElement.parentElement;
+  document.getElementById("nombre").value = selectRow.cells[0].innerHTML;
+  document.getElementById("tipo_proyecto").value = selectRow.cells[1].innerHTML;
+  document.getElementById("fecha_ini").value = selectRow.cells[2].innerHTML;
+  document.getElementById("fecha_fin").value = selectRow.cells[3].innerHTML;
+  document.getElementById("responsable").value = selectRow.cells[4].innerHTML;
+  document.getElementById("presupuesto").value = selectRow.cells[5].innerHTML;
+  document.getElementById("tipo_persona").value = selectRow.cells[6].innerHTML;
+  document.getElementById("tipo_profesor").value = selectRow.cells[7].innerHTML;
+  document.getElementById("semestreEstudiante").value =
+    selectRow.cells[8].innerHTML;
 }
 
-function updateRecord(formData){
-    selectRow.cells[0].innerHTML = formData.nombre;
-    selectRow.cells[1].innerHTML = formData.tipo_proyecto;
-    selectRow.cells[2].innerHTML = formData.fecha_ini;
-    selectRow.cells[3].innerHTML = formData.fecha_fin;
-    selectRow.cells[4].innerHTML = formData.responsable;
-    selectRow.cells[5].innerHTML = formData.presupuesto;
-    selectRow.cells[6].innerHTML = formData.tipo_persona;
-    selectRow.cells[7].innerHTML = formData.tipo_profesor;
-    selectRow.cells[8].innerHTML = formData.semestreEstudiante;
-    employees.splice(selectRow.rowIndex - 1, 1, {nombre: formData.nombre, tipo_proyecto: formData.tipo_proyecto, fecha_ini: formData.fecha_ini, fecha_fin: formData.fecha_fin, responsable: formData.responsable, presupuesto: formData.presupuesto, tipo_persona: formData.tipo_persona, tipo_profesor: formData.tipo_profesor, semestreEstudiante: formData.semestreEstudiante});
-    localStorage.setItem("employees", JSON.stringify(employees));
+function updateRecord(formData) {
+  selectRow.cells[0].innerHTML = formData.nombre;
+  selectRow.cells[1].innerHTML = formData.tipo_proyecto;
+  selectRow.cells[2].innerHTML = formData.fecha_ini;
+  selectRow.cells[3].innerHTML = formData.fecha_fin;
+  selectRow.cells[4].innerHTML = formData.responsable;
+  selectRow.cells[5].innerHTML = formData.presupuesto;
+  selectRow.cells[6].innerHTML = formData.tipo_persona;
+  selectRow.cells[7].innerHTML = formData.tipo_profesor;
+  selectRow.cells[8].innerHTML = formData.semestreEstudiante;
+  employees.splice(selectRow.rowIndex - 1, 1, {
+    nombre: formData.nombre,
+    tipo_proyecto: formData.tipo_proyecto,
+    fecha_ini: formData.fecha_ini,
+    fecha_fin: formData.fecha_fin,
+    responsable: formData.responsable,
+    presupuesto: formData.presupuesto,
+    tipo_persona: formData.tipo_persona,
+    tipo_profesor: formData.tipo_profesor,
+    semestreEstudiante: formData.semestreEstudiante,
+  });
+  localStorage.setItem("employees", JSON.stringify(employees));
 }
 
 function updateAfterPaageRefresh() {
@@ -136,7 +145,7 @@ function updateAfterPaageRefresh() {
             <td>${fecha_fin}</td>
             <td>${days}</td>
             <td><button class="bg-green-600 text-green-200 text-sm p-1 border border-green-800" onclick="editForm(this)">Edit</button> <button class="bg-red-600 text-red-200 text-sm p-1 border border-red-800" onclick="deleteRecord(this)">Delete</button> <button class="bg-yellow-600 text-yellow-200 text-sm p-1 border border-yellow-800" onclick="onVista(this)">Vista Rapida</button></td>
-            </tr>`
+            </tr>`;
     }
   }
 }

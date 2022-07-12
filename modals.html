@@ -1,0 +1,116 @@
+<button class="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-700 transition" onclick="openModal('modal')">Open modal</button>
+
+<div id="modal" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 modal">
+    <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+
+        <!-- Modal header -->
+        <div class="flex justify-between items-center bg-green-500 text-white text-xl rounded-t-md px-4 py-2">
+            <h3>Modal header</h3>
+            <button onclick="closeModal('modal')">x</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="max-h-48 overflow-y-scroll p-4">
+            <p>Scrollable modal body</p>
+            <p>Scrollable modal body</p>
+            <p>Scrollable modal body</p>
+            <p>Scrollable modal body</p>
+            <p>Scrollable modal body</p>
+            <p>Scrollable modal body</p>
+            <p>Scrollable modal body</p>
+            <p>Scrollable modal body</p>
+            <p>Scrollable modal body</p>
+            <p>Scrollable modal body</p>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="px-4 py-2 border-t border-t-gray-500 flex justify-end items-center space-x-4">
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition" onclick="closeModal('modal')">Close (ESC)</button>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+window.openModal = function(modalId) {
+  document.getElementById(modalId).style.display = 'block'
+  document.getElementsByTagName('body')[0].classList.add('overflow-y-hidden')
+}
+
+window.closeModal = function(modalId) {
+  document.getElementById(modalId).style.display = 'none'
+  document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+}
+
+// Close all modals when press ESC
+document.onkeydown = function(event) {
+  event = event || window.event;
+  if (event.keyCode === 27) {
+    document.getElementsByTagName('body')[0].classList.remove('overflow-y-hidden')
+    let modals = document.getElementsByClassName('modal');
+    Array.prototype.slice.call(modals).forEach(i => {
+      i.style.display = 'none'
+    })
+  }
+};
+</script>
+
+
+
+
+<div id="modal" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 modal">
+    <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+
+        <!-- Modal header -->
+        <div class="flex justify-between items-center bg-green-500 text-white text-xl rounded-t-md px-4 py-2">
+            <h3>Modal header</h3>
+            <button onclick="closeModal('modal')">x</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="max-h-48 overflow-y-scroll p-4">
+            <table class="min-w-full" id="storeList2">
+                <thead class="bg-slate-50 border-b border-slate-200">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                            Codigo
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                            Nombre
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                            Tipo de proyecto
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                            Fecha Inicio
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                            Fecha Fin
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                            Responsable
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                            Presupuesto
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                            Tipo de persona
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                            Extra persona
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    
+            
+
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="px-4 py-2 border-t border-t-gray-500 flex justify-end items-center space-x-4">
+            <button class="bg-violet-500 border-b border-green-800" onclick="closeModal('modal')">Close (ESC)</button>
+        </div>
+    </div>
+</div>

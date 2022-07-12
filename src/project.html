@@ -130,7 +130,7 @@
                 <div class="col-span-1">
                     <div class="shadow-lg p-3">
                         <h1 class="text-center text-3xl">Nuevo proyecto</h1>
-                        <form class="formulario" id="formulario" onsubmit="event.preventDefault();onSubmitFrom();">
+                        <form class="formulario" id="formulario" onsubmit="onFormSubmit()">
                             <table>
                                 <tr>
                                     <td>Código del proyecto</td>
@@ -219,7 +219,7 @@
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td>
-                                        <button  type="submit" value="Submit"> validar</button>
+                                        <input type="submit" value="Submit">
                                     </td>
                                 </tr>
 
@@ -227,43 +227,116 @@
                         </form>
                     </div>
                 </div>
+                
 
                 <div class="col-span-2">
                     <h1 class="text-center text-3xl">Listado de proyectos</h1>
-                    <table class="min-w-full" id="tableProyectos">
-                        <thead class="bg-slate-50 border-b border-slate-200">
-                            <tr>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
-                                    Nombre
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
-                                    Responsable
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
-                                    Fecha Inicio
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
-                                    Fecha Fin
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
-                                    Dias de Ejecución
-                                </th>
-                                <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
-                                    Acciones
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody">
-                    
+                    <td>
+                        <table class="min-w-full" id="storeList">
+                            <thead class="bg-slate-50 border-b border-slate-200">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                        Nombre
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                        Responsable
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                        Fecha Inicio
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                        Fecha Fin
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                        Dias de Ejecución
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                        Acciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
 
-                        </tbody>
-                    </table>
+
+
+
+
+                            </tbody>
+                        </table>
+                    </td>
+                </div>
+
+                <div id="modal" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 modal">
+                    <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+                
+                        <!-- Modal header -->
+                        <div class="flex justify-between items-center bg-green-500 text-white text-xl rounded-t-md px-4 py-2">
+                            <h3>Modal header</h3>
+                            <button onclick="closeModal('modal')">x</button>
+                        </div>
+                
+                        <!-- Modal body -->
+                        <div class="max-h-48 overflow-y-scroll p-4">
+                            <table  id="storeList2">
+                                <thead class="bg-slate-50 border-b border-slate-200">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                            Codigo
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                            Nombre
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                            Tipo de proyecto
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                            Fecha Inicio
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                            Fecha Fin
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                            Responsable
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                            Presupuesto
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                            Tipo de persona
+                                        </th>
+                                        <th scope="col" class="px-6 py-3 text-left text-sm font-medium text-slate-900">
+                                            Extra persona
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody2">
+                                    
+                            
+                
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                
+                        <!-- Modal footer -->
+                        <div class="px-4 py-2 border-t border-t-gray-500 flex justify-end items-center space-x-4">
+                            <button class="bg-violet-500 border-b border-green-800" onclick="closeModal('modal')">Close (ESC)</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
 
+
+
         </div>
     </div>
+
+                                
+
+
+
+
 
     <footer class="bg-gray-700 text-center text-white py-5 text-sm">
         <div class="flex justify-center"><img src="images/logou2.png" alt=""></div>
@@ -357,7 +430,11 @@
 
                     document.getElementById("error_tipo_persona").innerHTML = "Debe seleccionar un tipo de persona";
                     return false;
-                }
+                } else {
+                    // si todo es correcto, se envia el formulario
+                    return true;
+
+                } 
 
             // si todo es correcto guardamos el proyecto en un array y lo mostramos enseguida en la tabla proyectos
 
@@ -366,37 +443,10 @@
         }
 
 
-        // obetenemos el valor de los inputs y los mostramos en la tabla
-        function mostrarProyecto() {
-            var nombre = document.getElementById("nombre").value;
-            var tipo_proyecto = document.getElementById("tipo_proyecto").value;
-            var fecha_inicio = document.getElementById("fecha_ini").value;
-            var fecha_fin = document.getElementById("fecha_fin").value;
-            var responsable = document.getElementById("responsable").value;
-            var presupuesto = document.getElementById("presupuesto").value;
-            var tipo_persona = document.getElementById("tipo_persona").value;
 
-            var proyecto = [nombre, tipo_proyecto, fecha_inicio, fecha_fin, responsable, presupuesto, tipo_persona];
-            var tabla = document.getElementById("tabla");
-            var fila = tabla.insertRow(-1);
-            var celda1 = fila.insertCell(0);
-            var celda2 = fila.insertCell(1);
-            var celda3 = fila.insertCell(2);
-            var celda4 = fila.insertCell(3);
-            var celda5 = fila.insertCell(4);
-            var celda6 = fila.insertCell(5);
-            var celda7 = fila.insertCell(6);
-            celda1.innerHTML = nombre;
-            celda2.innerHTML = tipo_proyecto;
-            celda3.innerHTML = fecha_inicio;
-            celda4.innerHTML = fecha_fin;
-            celda5.innerHTML = responsable;
-            celda6.innerHTML = presupuesto;
-            celda7.innerHTML = tipo_persona;
-        }
 
     </script>
-    <script src="scripts/myscript.js"></script>
+    <script src="./script.js"></script>
 
 </body>
 
